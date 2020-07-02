@@ -286,7 +286,7 @@ void GLWidget::paintGL()
     m_program->setUniformValue(m_mvMatrixLoc, m_camera * m_world);
     QMatrix3x3 normalMatrix = m_world.normalMatrix();
     m_program->setUniformValue(m_normalMatrixLoc, normalMatrix);
-    glLineWidth(2);
+    glLineWidth(5);
 
     glDrawArrays(GL_LINE_STRIP, 0, m_logo.vertexCount());
 
