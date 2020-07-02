@@ -1,8 +1,10 @@
 HEADERS       = glwidget.h \
+                file_format/yarns/yarns.h \
                 window.h \
                 mainwindow.h \
                 logo.h
 SOURCES       = glwidget.cpp \
+                file_format/yarns/yarns.cpp \
                 main.cpp \
                 window.cpp \
                 mainwindow.cpp \
