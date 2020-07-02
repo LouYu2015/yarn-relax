@@ -2,13 +2,13 @@ HEADERS       = glwidget.h \
                 file_format/yarns/yarns.h \
                 window.h \
                 mainwindow.h \
-                logo.h
+                yarn_3d_model.h
 SOURCES       = glwidget.cpp \
                 file_format/yarns/yarns.cpp \
                 main.cpp \
                 window.cpp \
                 mainwindow.cpp \
-                logo.cpp
+                yarn_3d_model.cpp
 
 QT           += widgets
 

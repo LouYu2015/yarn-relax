@@ -55,10 +55,10 @@
 #include <QVector>
 #include <QVector3D>
 
-class Logo
+class Yarn3DModel
 {
 public:
-    Logo();
+    Yarn3DModel();
     const GLfloat *constData() const { return m_data.constData(); }
     int count() const { return m_count; }
     int vertexCount() const { return m_count / 3; }
