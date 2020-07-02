@@ -78,6 +78,7 @@ public slots:
     void setXRotation(int angle);
     void setYRotation(int angle);
     void setZRotation(int angle);
+    void setCameraDistance(double newDistance);
     void cleanup();
 
 signals:
@@ -96,9 +97,13 @@ private:
     void setupVertexAttribs();
 
     bool m_core;
+    // Camera rotations
     int m_xRot = 0;
     int m_yRot = 0;
     int m_zRot = 0;
+    // Camera distance
+    float m_distance = 1;
+
     QPoint m_lastPos;
     Logo m_logo;
     QOpenGLVertexArrayObject m_vao;

@@ -122,6 +122,13 @@ void GLWidget::setZRotation(int angle)
     }
 }
 
+void GLWidget::setCameraDistance(double new_distance) {
+    if (new_distance > 0.1) {
+        m_distance = new_distance;
+        update();
+    }
+}
+
 void GLWidget::cleanup()
 {
     if (m_program == nullptr)
@@ -230,10 +237,6 @@ void GLWidget::initializeGL()
     // Store the vertex attribute bindings for the program.
     setupVertexAttribs();
 
-    // Our camera never changes in this example.
-    m_camera.setToIdentity();
-    m_camera.translate(0, 0, -1);
-
     // Light position is fixed.
     m_program->setUniformValue(m_lightPosLoc, QVector3D(0, 0, 70));
 
@@ -260,9 +263,12 @@ void GLWidget::paintGL()
     glEnable(GL_CULL_FACE);
 
     m_world.setToIdentity();
-    m_world.rotate(180.0f - (m_xRot / 16.0f), 1, 0, 0);
-    m_world.rotate(m_yRot / 16.0f, 0, 1, 0);
-    m_world.rotate(m_zRot / 16.0f, 0, 0, 1);
+
+    m_camera.setToIdentity();
+    m_camera.translate(0, 0, -m_distance);
+    m_camera.rotate(180.0f - (m_xRot / 16.0f), 1, 0, 0);
+    m_camera.rotate(m_yRot / 16.0f, 0, 1, 0);
+    m_camera.rotate(m_zRot / 16.0f, 0, 0, 1);
 
     QOpenGLVertexArrayObject::Binder vaoBinder(&m_vao);
     m_program->bind();
@@ -297,7 +303,7 @@ void GLWidget::mouseMoveEvent(QMouseEvent *event)
         setXRotation(m_xRot + 8 * dy);
         setYRotation(m_yRot + 8 * dx);
     } else if (event->buttons() & Qt::RightButton) {
-        setXRotation(m_xRot + 8 * dy);
+        setCameraDistance(m_distance + 0.02 * dy);
         setZRotation(m_zRot + 8 * dx);
     }
     m_lastPos = event->pos();
