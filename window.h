@@ -75,12 +75,7 @@ private slots:
     void dockUndock();
 
 private:
-    QSlider *createSlider();
-
     GLWidget *glWidget;
-    QSlider *xSlider;
-    QSlider *ySlider;
-    QSlider *zSlider;
     QPushButton *dockBtn;
     MainWindow *mainWindow;
 };
