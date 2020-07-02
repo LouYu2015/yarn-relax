@@ -54,6 +54,10 @@
 #include <QCoreApplication>
 #include <math.h>
 
+constexpr float CAMERA_TRANSLATION_SPEED = 0.1;
+constexpr float CAMERA_ROTATION_SPEED = 8;
+constexpr float CAMERA_ZOOM_SPEED = 0.02;
+
 bool GLWidget::m_transparent = false;
 
 GLWidget::GLWidget(QWidget *parent)
@@ -304,11 +308,11 @@ void GLWidget::mouseMoveEvent(QMouseEvent *event)
     int dy = event->y() - m_lastPos.y();
 
     if (event->buttons() & Qt::LeftButton) {
-        setXRotation(m_xRot + 8 * dy);
-        setYRotation(m_yRot + 8 * dx);
+        setXRotation(m_xRot + CAMERA_ROTATION_SPEED * dy);
+        setYRotation(m_yRot + CAMERA_ROTATION_SPEED * dx);
     } else if (event->buttons() & Qt::RightButton) {
-        setCameraDistance(m_distance + 0.02 * dy);
-        setZRotation(m_zRot + 8 * dx);
+        setCameraDistance(m_distance + CAMERA_ZOOM_SPEED * dy);
+        setZRotation(m_zRot + CAMERA_ROTATION_SPEED * dx);
     }
     m_lastPos = event->pos();
 }
