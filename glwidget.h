@@ -92,6 +92,7 @@ protected:
     void resizeGL(int width, int height) override;
     void mousePressEvent(QMouseEvent *event) override;
     void mouseMoveEvent(QMouseEvent *event) override;
+    void keyPressEvent(QKeyEvent *event) override;
 
 private:
     void setupVertexAttribs();
@@ -103,6 +104,8 @@ private:
     int m_zRot = 0;
     // Camera distance
     float m_distance = 1;
+    // Camera translation
+    glm::vec3 m_tran = glm::vec3(0, 0, 0);
 
     QPoint m_lastPos;
     Yarn3DModel m_logo;

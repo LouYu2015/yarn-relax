@@ -71,6 +71,7 @@ GLWidget::GLWidget(QWidget *parent)
         fmt.setAlphaBufferSize(8);
         setFormat(fmt);
     }
+    setFocusPolicy(Qt::StrongFocus);
 }
 
 GLWidget::~GLWidget()
@@ -277,6 +278,7 @@ void GLWidget::paintGL()
     m_camera.rotate(180.0f - (m_xRot / 16.0f), 1, 0, 0);
     m_camera.rotate(m_yRot / 16.0f, 0, 1, 0);
     m_camera.rotate(m_zRot / 16.0f, 0, 0, 1);
+    m_camera.translate(m_tran.x, m_tran.y, m_tran.z);
 
     QOpenGLVertexArrayObject::Binder vaoBinder(&m_vao);
     m_program->bind();
@@ -300,6 +302,35 @@ void GLWidget::resizeGL(int w, int h)
 void GLWidget::mousePressEvent(QMouseEvent *event)
 {
     m_lastPos = event->pos();
+}
+
+void GLWidget::keyPressEvent(QKeyEvent *event) {
+    QOpenGLWidget::keyPressEvent(event);
+    switch (event->key()) {
+    case Qt::Key_W:
+        m_tran.z -= CAMERA_TRANSLATION_SPEED;
+        break;
+    case Qt::Key_S:
+        m_tran.z += CAMERA_TRANSLATION_SPEED;
+        break;
+    case Qt::Key_Left:
+    case Qt::Key_A:
+        m_tran.x -= CAMERA_TRANSLATION_SPEED;
+        break;
+    case Qt::Key_Right:
+    case Qt::Key_D:
+        m_tran.x += CAMERA_TRANSLATION_SPEED;
+        break;
+    case Qt::Key_Up:
+        m_tran.y += CAMERA_TRANSLATION_SPEED;
+        break;
+    case Qt::Key_Down:
+        m_tran.y -= CAMERA_TRANSLATION_SPEED;
+        break;
+    default:
+        return;
+    }
+    update();
 }
 
 void GLWidget::mouseMoveEvent(QMouseEvent *event)
