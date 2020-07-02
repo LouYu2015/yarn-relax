@@ -56,7 +56,7 @@
 #include <QOpenGLVertexArrayObject>
 #include <QOpenGLBuffer>
 #include <QMatrix4x4>
-#include "logo.h"
+#include "yarn_3d_model.h"
 
 QT_FORWARD_DECLARE_CLASS(QOpenGLShaderProgram)
 
@@ -105,7 +105,7 @@ private:
     float m_distance = 1;
 
     QPoint m_lastPos;
-    Logo m_logo;
+    Yarn3DModel m_logo;
     QOpenGLVertexArrayObject m_vao;
     QOpenGLBuffer m_logoVbo;
     QOpenGLShaderProgram *m_program = nullptr;

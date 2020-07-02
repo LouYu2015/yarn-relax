@@ -48,26 +48,12 @@
 **
 ****************************************************************************/
 
-#include "logo.h"
+#include "yarn_3d_model.h"
 #include <qmath.h>
 
-Logo::Logo()
+Yarn3DModel::Yarn3DModel()
 {
-    m_data.resize(2500 * 6);
+    _yarns = _yarns.load("/home/louyu/Documents/UW/Research/GRAIL/code/example.yarns");
 
-    int i = 0;
-    m_data[i++] = 0;
-    m_data[i++] = 0;
-    m_data[i++] = 0;
-    m_data[i++] = 0.1;
-    m_data[i++] = 0.1;
-    m_data[i++] = 0.1;
 
-    m_data[i++] = 0.2;
-    m_data[i++] = 0.2;
-    m_data[i++] = 0.2;
-    m_data[i++] = 0.5;
-    m_data[i++] = 0.5;
-    m_data[i++] = 0.5;
-    m_count = i;
 }

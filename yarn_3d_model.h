@@ -55,18 +55,19 @@
 #include <QVector>
 #include <QVector3D>
 
+#include "file_format/yarns/yarns.h"
+
 class Yarn3DModel
 {
 public:
     Yarn3DModel();
-    const GLfloat *constData() const { return m_data.constData(); }
-    int count() const { return m_count; }
-    int vertexCount() const { return m_count / 3; }
+    const GLfloat *constData() const { return reinterpret_cast<const GLfloat *>(&_yarns.yarns[0].points[0]); }
+    int vertexCount() const { return _yarns.yarns[0].points.size(); }
+    int count() const { return vertexCount() * 3; }
 
 private:
 
-    QVector<GLfloat> m_data;
-    int m_count = 0;
+    file_format::yarns::Yarns _yarns;
 };
 
 #endif // LOGO_H
